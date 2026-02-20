@@ -1,0 +1,16 @@
+-> Authentication
+   -> Register
+      - User data saving
+      - Token usage
+   -> Login
+   -> Logout
+
+-> Post
+   -> Create post
+   -> Can see the feed
+   -> Like post
+   -> Save post
+
+-> Users
+   -> Followers
+   -> Following
