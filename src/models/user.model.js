@@ -17,10 +17,8 @@ const userSchema = new mongo.Schema({
     bio: String,
     profileImage:{
         type: String,
-        default: 'https://ik.imagekit.io/vyukxce/download.jpg?updatedAt=1770885688593'
-    }
+        default: 'https://ik.imagekit.io/vyukxce/download.jpg?updatedAt=1770885688593'}
 })
 
-const userModel = mongo.model('users', userSchema);
-
+const userModel = mongo.model('users',userSchema);
 module.exports = userModel;
