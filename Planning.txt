@@ -23,6 +23,8 @@
              -> Image integration and handling.
                 -> Image will be send in the form of files so in postman we will use form-data not raw data.
                     -> If we send the image in from of file the backend will not able to read that file so we will use a middleware called "MULTER".
+                       -> We have to install IMAGEKIT npm package it take the image from the server and store it in an cloud stroage.
+                           -> For best assist i had seen the documentation of imagekit from "https://github.com/imagekit-developer/imagekit-nodejs".
 
    -> Feed Post
    -> Like Post
