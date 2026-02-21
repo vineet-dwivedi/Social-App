@@ -1,0 +1,33 @@
+-> Authentication
+   -> Registing
+      -> Saving user data
+      -> Token usage
+   -> Login
+   -> Logout
+
+-> Post
+   -> Creation
+      ->Post Data{
+        Caption : String
+        Img_url : String
+           -> Image Hnadling
+        User : User.id
+        CreatedAt : Date & Time
+      }
+      -> POST /api/posts {Fully Proctected Only The User With Token Will Able To Access}
+             -> Data will come from req.body.
+                -> Data{
+                    caption,
+                    image-file
+                }
+             -> Image integration and handling.
+                -> Image will be send in the form of files so in postman we will use form-data not raw data.
+                    -> If we send the image in from of file the backend will not able to read that file so we will use a middleware called "MULTER".
+
+   -> Feed Post
+   -> Like Post
+   -> Save Post
+
+-> Users
+   -> Followers
+   -> Following
