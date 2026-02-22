@@ -25,6 +25,10 @@
                     -> If we send the image in from of file the backend will not able to read that file so we will use a middleware called "MULTER".
                        -> We have to install IMAGEKIT npm package it take the image from the server and store it in an cloud stroage.
                            -> For best assist i had seen the documentation of imagekit from "https://github.com/imagekit-developer/imagekit-nodejs".
+             -> While creating a post we also have to handle the users that a particular user is creating that particular post so for that we are going to use JSONWEBTOKEN which will help us to verify the user from the user model we will use cookies which will store the token and if the particular cookies do not have any kind of token wee will give an error res.status. If the particular cookie have a token we will verify it by using jwt key and the token of user model.
+                 -> Now we are able to create a post by using const post = await postmodel.create{
+                  data info,
+                 }              
 
    -> Feed Post
    -> Like Post
