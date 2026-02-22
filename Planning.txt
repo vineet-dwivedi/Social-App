@@ -1,5 +1,5 @@
 -> Authentication
-   -> Registing
+   -> Register
       -> Saving user data
       -> Token usage
    -> Login
@@ -10,7 +10,7 @@
       ->Post Data{
         Caption : String
         Img_url : String
-           -> Image Hnadling
+           -> Image - String
         User : User.id
         CreatedAt : Date & Time
       }
@@ -28,9 +28,9 @@
              -> While creating a post we also have to handle the users that a particular user is creating that particular post so for that we are going to use JSONWEBTOKEN which will help us to verify the user from the user model we will use cookies which will store the token and if the particular cookies do not have any kind of token wee will give an error res.status. If the particular cookie have a token we will verify it by using jwt key and the token of user model.
                  -> Now we are able to create a post by using const post = await postmodel.create{
                   data info,
-                 }              
-             -> Now, i am going to add feature of fetching the particular user post by using get method and using particular user id and for details i did the same .
-             
+                  }              
+             -> Now, i am going to add feature of fetching the particular user post by using get method and using particular user id and for details i did the same. 
+
    -> Feed Post
    -> Like Post
    -> Save Post
