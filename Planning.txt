@@ -31,6 +31,8 @@
                   }              
              -> Now, i am going to add feature of fetching the particular user post by using get method and using particular user id and for details i did the same. 
 
+      -> Middleware : it is the one of the most imp thing in whole backend because it makes the server scaleable by removing the repeatition of the code, it's function take 3 params (req,res,next) we know about req as well as about res but if we talk about next it is also act as middleware which simply means - “I’ve finished my part for this request. Now pass control to the next handler.”
+
    -> Feed Post
    -> Like Post
    -> Save Post
