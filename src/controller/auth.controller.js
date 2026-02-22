@@ -18,7 +18,7 @@ async function registerController(req,res){
     }
 
     const saltRound = 10;
-    const hash = bcrypt.hash(password, saltRound);
+    const hash = await bcrypt.hash(password, saltRound);
 
     const user = await userModel.create({
         username,email,bio,profileImage,password:hash
