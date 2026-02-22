@@ -29,7 +29,8 @@
                  -> Now we are able to create a post by using const post = await postmodel.create{
                   data info,
                  }              
-
+             -> Now, i am going to add feature of fetching the particular user post by using get method and using particular user id and for details i did the same .
+             
    -> Feed Post
    -> Like Post
    -> Save Post
