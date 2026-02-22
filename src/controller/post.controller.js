@@ -47,4 +47,70 @@ async function createPostController(req,res){
     })
 }
 
-module.exports = {createPostController}
+async function getPostController(req,res) {
+    const token = req.cookies.token;
+    if(!token){
+        return res.status(401).json({
+            message: 'Unauthorized access'
+        })
+    }
+
+    let decode;
+    try{
+        decode = await jwt.verify(token,process.env.JWT_KEY);
+    }catch(err){
+         return res.status(401).json({
+            message: 'Unauthorized Access'
+         })
+    }
+
+    const userId = decode.id;
+
+    const post = await postModel.findOne({user: userId});
+    res.status(200).json({
+        message: 'Post Fetched',
+        post
+    })
+}
+
+async function getPostDetailController(req,res) {
+    const token = req.cookies.token;
+    if(!token){
+        return res.status(401).json({
+            message: 'Unauthorized'
+        })
+    }
+
+    let decode;
+    try{
+        decode = await jwt.verify(token,process.env.JWT_KEY);
+    }catch(err){
+        return res.status(401).json({
+            message: 'Unauthorized Access'
+        })
+    }
+
+    const userId = decode.id;
+    const postId = req.params.postId;
+
+    const post= await postModel.findById(postId);
+
+    if(!post){
+        return res.status(404).json({
+            message: 'Post Not Found'
+        })
+    }
+
+    const isValidUser = post.user === userId;
+    if (!isValidUser){
+        return res.status(403).json({
+            message: 'Forbidden'
+        })
+    }
+
+    return res.status(200).json({
+        message: 'Post Details Fetched',
+        post
+    })
+}
+module.exports = {createPostController,getPostController,getPostDetailController}
