@@ -16,8 +16,17 @@ async function createPostController(req,res){
             message: 'Unauthorized access'
         })
     }
+ 
+    let decode
 
-    const decode = jwt.verify(token, process.env.JWT_KEY);
+    try{
+         decode = jwt.verify(token, process.env.JWT_KEY);
+    }catch(err){
+          return res.status(401).json({
+            message: 'Unauthorized'
+          })
+    }
+    
     console.log(decode);
 
     const files = await client.files.upload({
