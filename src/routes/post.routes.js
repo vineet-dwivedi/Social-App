@@ -10,4 +10,6 @@ postRoutes.post('/',upload.single('image'),userIdentifier,postController.createP
 postRoutes.get('/',userIdentifier,postController.getPostController);
 postRoutes.get('/details/:postId',userIdentifier,postController.getPostDetailController);
 
+postRoutes.post('/like/:postId',userIdentifier,postController.likePostController);
+
 module.exports = postRoutes;
