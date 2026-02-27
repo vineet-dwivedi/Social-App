@@ -20,6 +20,6 @@ const followSchema = new mongo.Schema({
 
 followSchema.index({follower: 1, followee:1},{unique:true})
 
-const followModel = mongo.Model('followers',followSchema)
+const followModel = mongo.model('followers',followSchema)
 
 module.exports = followModel;

@@ -1,0 +1,240 @@
+/* ================================
+   1. CSS RESET (Modern)
+================================ */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Remove default input styles */
+
+input,
+button,
+textarea {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+/* Remove link decoration */
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Remove list styles */
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* ================================
+   2. THEME VARIABLES
+================================ */
+
+:root {
+  /* Colors */
+  --color-bg-primary: #0f0f13;
+  --color-bg-secondary: #15151c;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.6);
+  --color-accent: #ff0066;
+  --color-accent-2: #6c5ce7;
+
+  /* Glass */
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.15);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+
+  /* Shadows */
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.4);
+  --shadow-strong: 0 25px 60px rgba(0, 0, 0, 0.6);
+
+  /* Transition */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* ================================
+   3. GLOBAL BODY STYLING
+================================ */
+
+body {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow-x: hidden;
+}
+
+/* ================================
+   4. TYPOGRAPHY SYSTEM
+================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+p {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* ================================
+   5. CONTAINER SYSTEM
+================================ */
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ================================
+   6. GLASS UTILITY
+================================ */
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-strong);
+}
+
+/* ================================
+   7. BUTTON BASE STYLE
+================================ */
+
+.btn {
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 500;
+  transition: var(--transition-medium);
+}
+
+.btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    var(--color-accent-2)
+  );
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255, 0, 102, 0.5);
+}
+
+/* ================================
+   8. INPUT BASE STYLING
+================================ */
+
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
+  color: white;
+  transition: var(--transition-medium);
+}
+
+.input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 15px rgba(255, 0, 102, 0.4);
+}
+
+/* ================================
+   9. SCROLLBAR STYLING (macOS feel)
+================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    var(--color-accent),
+    var(--color-accent-2)
+  );
+  border-radius: 10px;
+}
+
+/* ================================
+   10. TEXT SELECTION
+================================ */
+
+::selection {
+  background: var(--color-accent);
+  color: white;
+}
+
+/* ================================
+   11. ANIMATION UTILITIES
+================================ */
+
+.fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.slide-up {
+  animation: slideUp 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================
+   12. RESPONSIVE HELPERS
+================================ */
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+}
