@@ -1,8 +1,25 @@
 import React from "react";
 import "../../styles/form.scss";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 
 const Login = () => {
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const {handleLogin} = useAuth()
+
+  async function handle(e){
+     e.preventDefault();
+
+     handleLogin(username,password)
+     .then(res=>{
+           console.log(res);
+     })
+  }
+
   return (
     <div className="auth-page">
       <div className="bg-orbs"></div>
@@ -17,14 +34,14 @@ const Login = () => {
         <h1 className="title">Velix</h1>
         <p className="subtitle">Welcome back</p>
 
-        <form className="auth-form">
+        <form onSubmit={handle}className="auth-form">
           <div className="input-group">
-            <input type="text" required />
+            <input onChange={(e)=>{setUsername(e.target.value)}}type="text" required />
             <label>Username</label>
           </div>
 
           <div className="input-group">
-            <input type="password" required />
+            <input onChange={(e)=>{setPassword(e.target.value)}}type="password" required />
             <label>Password</label>
           </div>
 
