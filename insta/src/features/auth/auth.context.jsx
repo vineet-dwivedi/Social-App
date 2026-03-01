@@ -13,8 +13,10 @@ export function AuthProvider({children}){
         try{
             const response = await login(username,password)
             setUser(response.user)
+            return response
         }catch(err){
             console.log(err)
+            throw err
         }finally{
             setLoading(false)
         }
@@ -25,8 +27,10 @@ export function AuthProvider({children}){
         try{
             const response = await register(username,email,password)
             setUser(response.user)
+            return response
         }catch(err){
             console.log(err)
+            throw err
         }finally{
             setLoading(false)
         }

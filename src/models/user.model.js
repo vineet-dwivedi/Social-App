@@ -12,7 +12,8 @@ const userSchema = new mongo.Schema({
     },
     password:{
         type: String,
-        required: [true,'Enter pass']
+        required: [true,'Enter pass'],
+        select: false
     },
     bio: String,
     profileImage:{

@@ -14,10 +14,12 @@ const Login = () => {
   async function handle(e){
      e.preventDefault();
 
-     handleLogin(username,password)
-     .then(res=>{
-           console.log(res);
-     })
+     try {
+       const res = await handleLogin(username,password);
+       console.log(res);
+     } catch (err) {
+       console.log(err?.response?.data?.message || "Login failed");
+     }
   }
 
   return (

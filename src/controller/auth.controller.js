@@ -13,7 +13,7 @@ async function registerController(req,res){
 
     if(isUserExsist){
         return res.status(409).json({
-            message: 'User already exsist' +(isUserAlreadyExsist.email == email ? "Email already exsist":"Username already exsist")
+            message: 'User already exists ' + (isUserExsist.email == email ? "Email already exists" : "Username already exists")
         })
     }
 
@@ -46,11 +46,11 @@ async function loginController(req,res){
     const user = await userModel.findOne({
         $or:[{username:username},
             {email:email}]
-    })
+    }).select('+password');
 
     if(!user){
-        return res.status(404).json({
-            message: 'User not found'
+        return res.status(401).json({
+            message: 'Invalid credentials'
         })
     }
 
@@ -58,7 +58,7 @@ async function loginController(req,res){
 
     if(!isPassValid){
         return res.status(401).json({
-            message:'Password Invalid'
+            message:'Invalid credentials'
         })
     }
 

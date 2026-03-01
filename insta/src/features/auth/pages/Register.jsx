@@ -1,17 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/register.scss";
-import axios from 'axios';
 import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 
 const Register = () => {
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const { handleRegister } = useAuth();
 
   async function handle(e){
     e.preventDefault();
+    try {
+      await handleRegister(username, email, password);
+      navigate("/login");
+    } catch (err) {
+      console.log(err?.response?.data?.message || "Registration failed");
+    }
   }
 
   return (

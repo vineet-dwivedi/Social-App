@@ -9,7 +9,7 @@ const userIdentifier = require('../middleware/auth.middleware')
 postRoutes.post('/',upload.single('image'),userIdentifier,postController.createPostController);
 postRoutes.get('/',userIdentifier,postController.getPostController);
 postRoutes.get('/details/:postId',userIdentifier,postController.getPostDetailController);
-
 postRoutes.post('/like/:postId',userIdentifier,postController.likePostController);
+postRoutes.get('/feed',userIdentifier,postController.getFeedController);
 
 module.exports = postRoutes;
