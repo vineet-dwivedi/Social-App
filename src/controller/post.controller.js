@@ -1,6 +1,7 @@
 const postModel = require('../models/post.model');
 const {toFile}= require('@imagekit/nodejs');
 const ImageKit = require('@imagekit/nodejs');
+const likeModel = require('../models/like.model');
 const client = new ImageKit({
     privateKey: process.env.IMAGE_KIT
 });
@@ -86,7 +87,18 @@ async function likePostController(req,res){
 }
 
 async function getFeedController(req,res){
-    const posts = await postModel.find().populate('user');
+    const user = req.user;
+    const posts = await Promise.all((await postModel.find().populate('user').lean()).map(async (post)=>{
+        const isLiked = await likeModel.findOne({
+            user:user.username,
+            post:post._id
+        })
+        post.isLiked = isLiked
+        return post;
+    }))
+
+    
+
     res.status(200).json({
         message: 'Posts fetched successfully.',
         posts

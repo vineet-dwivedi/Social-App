@@ -29,9 +29,9 @@ const Post = ({ post }) => {
       <div className="post-actions">
         <div className="left-icons">
           <Heart
-            className={`icon ${liked ? "liked" : ""}`}
-            onClick={() => setLiked(!liked)}
-          />
+  className={`icon ${post?.isLiked ? "liked" : ""}`}
+  onClick={() => handleLike(post._id)}
+/>
           <MessageCircle className="icon" />
           <Send className="icon" />
         </div>
