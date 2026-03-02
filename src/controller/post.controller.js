@@ -86,7 +86,7 @@ async function likePostController(req,res){
 }
 
 async function getFeedController(req,res){
-    const posts = postModel.find().populate('user66666');
+    const posts = await postModel.find().populate('user');
     res.status(200).json({
         message: 'Posts fetched successfully.',
         posts

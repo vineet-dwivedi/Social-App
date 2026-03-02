@@ -1,70 +1,53 @@
 import React, { useState } from "react";
-import {
-  Heart,
-  MessageCircle,
-  Send,
-  Bookmark
-} from "lucide-react";
+import { Heart, MessageCircle, Send, Bookmark } from "lucide-react";
 import "../../styles/post.scss";
 
-const Post = () => {
+const Post = ({ post }) => {
   const [liked, setLiked] = useState(false);
+  const username = post?.user?.username || "Unknown user";
+  const profileImage = post?.user?.profileImage || "https://via.placeholder.com/40?text=U";
+  const imageUrl = post?.img_url || "https://via.placeholder.com/800x800?text=No+Image";
+  const caption = post?.caption || "";
 
   return (
-    <main className="feed-page">
-      <div className="post-card">
-
-        {/* Header */}
-        <div className="post-header">
-          <div className="user-info">
-            <img
-              src="https://images.unsplash.com/photo-1638991504410-96de7ac1c432?q=80&w=985&auto=format&fit=crop"
-              alt="user"
-            />
-            <div>
-              <p className="username">AlishaXce</p>
-              <span className="location">Mumbai, India</span>
-            </div>
+    <article className="post-card">
+      <div className="post-header">
+        <div className="user-info">
+          <img src={profileImage} alt={username} />
+          <div>
+            <p className="username">{username}</p>
           </div>
-
-          <button className="follow-btn">Follow</button>
         </div>
 
-        {/* Post Image */}
-        <div className="post-image">
-          <img
-            src="https://plus.unsplash.com/premium_photo-1711407242470-52576a2417e0?q=80&w=1170&auto=format&fit=crop"
-            alt="post"
-          />
-        </div>
-
-        {/* Actions */}
-        <div className="post-actions">
-          <div className="left-icons">
-            <Heart
-              className={`icon ${liked ? "liked" : ""}`}
-              onClick={() => setLiked(!liked)}
-            />
-            <MessageCircle className="icon" />
-            <Send className="icon" />
-          </div>
-
-          <Bookmark className="icon" />
-        </div>
-
-        {/* Bottom Section */}
-        <div className="post-bottom">
-          <p className="likes">{liked ? "24,532 likes" : "24,531 likes"}</p>
-
-          <p className="caption">
-            <span className="username">AlishaXce</span>  
-            Building aesthetic code one div at a time ✨
-          </p>
-
-          <p className="view-comments">View all 128 comments</p>
-        </div>
+        <button className="follow-btn">Follow</button>
       </div>
-    </main>
+
+      <div className="post-image">
+        <img src={imageUrl} alt="post" />
+      </div>
+
+      <div className="post-actions">
+        <div className="left-icons">
+          <Heart
+            className={`icon ${liked ? "liked" : ""}`}
+            onClick={() => setLiked(!liked)}
+          />
+          <MessageCircle className="icon" />
+          <Send className="icon" />
+        </div>
+
+        <Bookmark className="icon" />
+      </div>
+
+      <div className="post-bottom">
+        <p className="likes">{liked ? "You and others liked this" : "Be the first to like this"}</p>
+
+        <p className="caption">
+          <span className="username">{username}</span>{" "}
+          {caption}
+        </p>
+      </div>
+    </article>
   );
 };
 

@@ -78,8 +78,32 @@ async function loginController(req,res){
 }
 
 async function getMeController(req,res){
-    const userId = req.user.id
+    const token = req.cookies.token;
+
+    if(!token){
+        return res.status(200).json({
+            user: null
+        })
+    }
+
+    let decode = null;
+    try{
+        decode = jwt.verify(token, process.env.JWT_KEY);
+    }catch(err){
+        return res.status(200).json({
+            user: null
+        })
+    }
+
+    const userId = decode.id
     const user = await userModel.findById(userId)
+
+    if(!user){
+        return res.status(200).json({
+            user: null
+        })
+    }
+
     res.status(200).json({
         user:{
             username: user.username,

@@ -7,6 +7,33 @@ export const AuthContext = createContext();
 export function AuthProvider({children}){
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false)
+    const [checkingAuth, setCheckingAuth] = useState(true);
+
+    useEffect(() => {
+        let isMounted = true;
+
+        async function bootstrapAuth() {
+            try {
+                const response = await getMe();
+                if (isMounted) {
+                    setUser(response.user);
+                }
+            } catch (err) {
+                if (err?.response?.status !== 401) {
+                    console.log(err);
+                }
+            } finally {
+                if (isMounted) {
+                    setCheckingAuth(false);
+                }
+            }
+        }
+
+        bootstrapAuth();
+        return () => {
+            isMounted = false;
+        };
+    }, []);
 
     const handleLogin = async(username, password) =>{
         setLoading(true);
@@ -37,7 +64,7 @@ export function AuthProvider({children}){
     }
 
     return(
-        <AuthContext.Provider value={{user,loading,handleLogin,handleRegister}}>
+        <AuthContext.Provider value={{user,loading,checkingAuth,handleLogin,handleRegister}}>
             {children}
         </AuthContext.Provider>
     )

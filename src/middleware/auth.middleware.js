@@ -16,9 +16,8 @@ async function userIdentifier(req,res,next) {
             message: 'Unauthorized'
           })
     }
-
-    next();
     req.user = decode;
+    next();
 }
 
 module.exports = userIdentifier;
