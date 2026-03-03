@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect } from "react";
 import { PostContext } from "../post.context.jsx";
-import { getFeed,createPost } from "../services/post.api.js";
+import { getFeed,createPost,likePost,unlikePost } from "../services/post.api.js";
 
 export function usePost(){
     const context = useContext(PostContext);
@@ -35,9 +35,23 @@ export function usePost(){
         setLoading(false)
     }
 
+    const handleLike = async(post)=>{
+        setLoading(true)
+        const data = await likePost(post)
+        await handleGetFeed();
+        setLoading(false);
+    }
+
+    const handleunLike = async(post)=>{
+        setLoading(true)
+        const data = await unlikePost(post)
+        await handleGetFeed();
+        setLoading(false);
+    }
+
     useEffect(()=>{
         handleGetFeed()
     },[])
 
-    return {loading,feed,post,handleGetFeed, handleCreatePost}
+    return {loading,feed,post,handleGetFeed, handleCreatePost, handleLike,handleunLike}
 }

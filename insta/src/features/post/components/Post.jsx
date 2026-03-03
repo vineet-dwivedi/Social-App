@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Heart, MessageCircle, Send, Bookmark } from "lucide-react";
 import "../../styles/post.scss";
+import { usePost } from "../hooks/usePost";
+import { unlikePost } from "../services/post.api";
 
 const Post = ({ post }) => {
   const [liked, setLiked] = useState(false);
@@ -8,6 +10,8 @@ const Post = ({ post }) => {
   const profileImage = post?.user?.profileImage || "https://via.placeholder.com/40?text=U";
   const imageUrl = post?.img_url || "https://via.placeholder.com/800x800?text=No+Image";
   const caption = post?.caption || "";
+
+  
 
   return (
     <article className="post-card">
@@ -30,7 +34,7 @@ const Post = ({ post }) => {
         <div className="left-icons">
           <Heart
   className={`icon ${post?.isLiked ? "liked" : ""}`}
-  onClick={() => handleLike(post._id)}
+  onClick={() =>{post.isLiked?handleunlike(post._id):handleLike(post._id)}}
 />
           <MessageCircle className="icon" />
           <Send className="icon" />
