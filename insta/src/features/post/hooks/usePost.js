@@ -1,6 +1,6 @@
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { PostContext } from "../post.context.jsx";
-import { getFeed } from "../services/post.api.js";
+import { getFeed,createPost } from "../services/post.api.js";
 
 export function usePost(){
     const context = useContext(PostContext);
@@ -27,5 +27,17 @@ export function usePost(){
             setLoading(false)
         }
     }, [setFeed, setLoading])
-    return {loading,feed,post,handleGetFeed}
+
+    const handleCreatePost = async(imageFile,caption)=>{
+        setLoading(true)
+        const data = await createPost(imageFile,caption);
+        setFeed([data.post,...feed])
+        setLoading(false)
+    }
+
+    useEffect(()=>{
+        handleGetFeed()
+    },[])
+
+    return {loading,feed,post,handleGetFeed, handleCreatePost}
 }

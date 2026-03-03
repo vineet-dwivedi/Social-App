@@ -3,6 +3,7 @@ import Login from "./features/auth/pages/Login";
 import Register from "./features/auth/pages/Register";
 import Feed from "./features/post/pages/feed";
 import { useAuth } from "./features/auth/hooks/useAuth";
+import CreatePost from "./features/post/pages/CreatePost";
 
 function ProtectedRoute({ children }) {
   const { user, checkingAuth } = useAuth();
@@ -37,6 +38,7 @@ export function AppRoutes() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<ProtectedRoute><Feed/></ProtectedRoute>}/>
+        <Route path="/create-post" element={<ProtectedRoute><CreatePost/></ProtectedRoute>}/>
         <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
         <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
       </Routes>

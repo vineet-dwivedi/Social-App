@@ -2,6 +2,8 @@ import React,{ useEffect } from 'react'
 import Post from '../components/Post'
 import { usePost } from '../hooks/usePost';
 import { useAuth } from '../../auth/hooks/useAuth';
+import Nav from '../../styles/components/Nav';
+import '../../styles/feed.scss'
 
 const Feed = () => {
   const {feed,handleGetFeed,loading} = usePost();
@@ -17,22 +19,21 @@ const Feed = () => {
     });
   },[user, handleGetFeed])
 
-  if(loading || feed === null){
-    return (<main><h1>Feed is loading....</h1></main>)
-  }
-
-  if(!feed || feed.length === 0){
-    return (<main><h1>No posts found.</h1></main>)
-  }
-
   return (
     <main className='feed-page'>
+      <Nav/>
         <div className="feed">
+          {(loading || feed === null) ? (
+            <h1 className="feed-status">Feed is loading...</h1>
+          ) : feed.length === 0 ? (
+            <h1 className="feed-status">No posts found.</h1>
+          ) : (
             <div className="posts">
-                {feed.map((postItem) => (
-                  <Post key={postItem._id} post={postItem} />
-                ))}
+              {feed.map((postItem) => (
+                <Post key={postItem._id} post={postItem} />
+              ))}
             </div>
+          )}
         </div>
     </main>
   )

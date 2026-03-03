@@ -35,7 +35,7 @@
    -> Feed Post
    -> Like Post
    -> Save Post
-
+              -> Edge Collection in easy words it is a collection which show relationship between 2 users and store there info simulataneously like just suppose we have a user who is goin to follow the user 2 and when user will follow him we have to show that he started following which shows a realtionship between 2 user data and to store this data we use edge collection.
 -> Users
    -> Followers
    -> Following

@@ -88,7 +88,7 @@ async function likePostController(req,res){
 
 async function getFeedController(req,res){
     const user = req.user;
-    const posts = await Promise.all((await postModel.find().populate('user').lean()).map(async (post)=>{
+    const posts = await Promise.all((await postModel.find().populate('user').sort({ _id: -1}).lean()).map(async (post)=>{
         const isLiked = await likeModel.findOne({
             user:user.username,
             post:post._id
